@@ -11,7 +11,7 @@
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
-                            <input type="password" v-model="loginForm.password" class="form-control" placeholder="password" :class="{ 'is-invalid': loginForm.errors.has('password') }" >  
+                            <input type="password" v-model="loginForm.password" class="form-control" placeholder="password" :class="{ 'is-invalid': loginForm.errors.has('password') }" >
                             <div class="text-danger" v-if="loginForm.errors.has('password')" v-html="loginForm.errors.get('password')" />
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -37,9 +37,11 @@
             login() {
                 axios.get('/sanctum/csrf-cookie').then(response => {
                    //console.log('logins');
-                   //console.log(response); 
-                   this.loginForm.post('/login').then(response => {
+                   //console.log(response);
+                   this.loginForm.post('login').then(response => {
                        console.log(response);
+                       //this.getUserData();
+                       this.$router.push({ name: 'dashboard' });
                    });
                 });
             },
@@ -47,10 +49,11 @@
                 axios.get('/api/user').then(response => {
                     console.log(response);
                 });
-            }
+            },
         },
 
         mounted() {
+            //this.getUserData();
             console.log('Component mounted.')
         }
     }

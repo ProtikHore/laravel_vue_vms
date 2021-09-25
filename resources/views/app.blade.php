@@ -9,6 +9,7 @@
     </head>
     <body>
         <div id="app">
+            <dashboard-component class="mb-3"></dashboard-component>
             <router-view></router-view>
         </div>
 
