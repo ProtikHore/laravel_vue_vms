@@ -40,15 +40,21 @@
                    //console.log(response);
                    this.loginForm.post('login').then(response => {
                        console.log(response);
-                       //this.getUserData();
+                       this.getUserData();
                        this.$router.push({ name: 'dashboard' });
                    });
                 });
             },
             getUserData() {
-                axios.get('/api/user').then(response => {
-                    console.log(response);
+                axios.get('/sanctum/csrf-cookie').then(response => {
+                   axios.get('/api/user').then(response => {
+                        console.log(response);
+                    });
                 });
+
+                // axios.get('/api/user').then(response => {
+                //     console.log(response);
+                // });
             },
         },
 

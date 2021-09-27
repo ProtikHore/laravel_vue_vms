@@ -2085,6 +2085,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     logout: function logout() {
@@ -2161,7 +2163,9 @@ __webpack_require__.r(__webpack_exports__);
         //console.log('logins');
         //console.log(response);
         _this.loginForm.post('login').then(function (response) {
-          console.log(response); //this.getUserData();
+          console.log(response);
+
+          _this.getUserData();
 
           _this.$router.push({
             name: 'dashboard'
@@ -2170,9 +2174,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getUserData: function getUserData() {
-      axios.get('/api/user').then(function (response) {
-        console.log(response);
-      });
+      axios.get('/sanctum/csrf-cookie').then(function (response) {
+        axios.get('/api/user').then(function (response) {
+          console.log(response);
+        });
+      }); // axios.get('/api/user').then(response => {
+      //     console.log(response);
+      // });
     }
   },
   mounted: function mounted() {
@@ -2206,7 +2214,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    loadVisitor: function loadVisitor() {
+      axios.get('/sanctum/csrf-cookie').then(function (response) {
+        axios.get('/api/get/visitor').then(function (response) {
+          console.log(response);
+        });
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadVisitor();
+    console.log('asas');
+  }
+});
 
 /***/ }),
 
@@ -2221,6 +2246,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -2276,8 +2304,8 @@ try {
 } catch (e) {}
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-axios.defaults.withCredentials = true;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
 
 /***/ }),
 
@@ -38038,52 +38066,57 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4 mt-2" }, [
+      _c("div", { staticClass: "col mt-2" }, [
         _c("div", { staticClass: "card" }, [
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                { staticClass: "nav-link", attrs: { to: { name: "visitor" } } },
-                [_vm._v("Visitor")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "nav-item" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "nav-link",
-                  attrs: { to: { name: "visitorCard" } }
-                },
-                [_vm._v("Visitor Card")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("li", [
+          _c("ul", [
             _c(
-              "button",
-              {
-                staticClass: "btn btn-warning",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.logout.apply(null, arguments)
+              "li",
+              {},
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "visitor" } }
+                  },
+                  [_vm._v("Visitor")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {},
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "visitorCard" } }
+                  },
+                  [_vm._v("Visitor Card")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-warning",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.logout.apply(null, arguments)
+                    }
                   }
-                }
-              },
-              [_vm._v("Logout")]
-            )
+                },
+                [_vm._v("Logout")]
+              )
+            ])
           ])
         ])
       ])
@@ -38235,20 +38268,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", {}, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }, [_c("dashboard-component")], 1),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8 mt-2" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("h2", [_vm._v("This is Visitor")])
-          ])
-        ])
+    return _c("div", { staticClass: "col-md-8 mt-2" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("h2", [_vm._v("This is Visitor")])
       ])
     ])
   }
@@ -38275,20 +38310,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", {}, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }, [_c("dashboard-component")], 1),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8 mt-2" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("h2", [_vm._v("This is Visitor Card")])
-          ])
-        ])
+    return _c("div", { staticClass: "col-md-8 mt-2" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("h2", [_vm._v("This is Visitor Card")])
       ])
     ])
   }
