@@ -24,16 +24,17 @@ use Illuminate\Support\Facades\Route;
 //     return 'hfhh';
 // });
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/user', function (Request $request) {
-        return 'sdsds';
-        //return $request->user();
-    });
-
-    Route::get('get/visitor', [VisitorController::class, 'getVisitor']);
-});
-
-// Route::group(['middleware' => ['auth:sanctum']], function(){
-// 	Route::get('/userall', [UserController::class, 'getUserAll']);
-//     Route::get('/get/visitor', [VisitorController::class, 'getVisitor']);
+// Route::middleware(['auth:sanctum'])->group(function () {
+//     Route::get('/user', function (Request $request) {
+//         return $request->user();
+//     });
+//     Route::get('get/visitor', [VisitorController::class, 'getVisitor']);
 // });
+
+// Route::get('/get/visitor', [VisitorController::class, 'getVisitor']);
+
+Route::group(['middleware' => ['auth:sanctum']], function(){
+	Route::get('/userall', [UserController::class, 'getUserAll']);
+    Route::get('/get/visitor', [VisitorController::class, 'getVisitor']);
+    Route::post('/save/visitor', [VisitorController::class, 'saveRecords']);
+});

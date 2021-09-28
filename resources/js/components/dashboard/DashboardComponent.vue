@@ -25,9 +25,16 @@ export default {
     methods: {
         logout() {
             console.log('hello');
-            axios.post('/logout').then(response => {
-                console.log(response);
-                this.$router.push({ name: 'login' });
+            // axios.post('/logout').then(response => {
+            //     console.log(response);
+            //     this.$router.push({ name: 'login' });
+            // });
+
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.post('/logout').then(response => {
+                    console.log(response);
+                    this.$router.push({ name: 'login' });
+                });
             });
         }
     },
