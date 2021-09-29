@@ -2336,6 +2336,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2347,21 +2354,32 @@ __webpack_require__.r(__webpack_exports__);
       })
     };
   },
+  // data() {
+  //     return {
+  //         addVisitorForm: new Form({
+  //             name: 'protik',
+  //             address: 'sddsd',
+  //             email: 'esdsd',
+  //         })
+  //     }
+  // },
   methods: {
     addVisitor: function addVisitor() {
-      var data = new FormData();
-      data.append('name', this.addVisitorForm.name);
-      data.append('address', this.addVisitorForm.address);
-      data.append('email', this.addVisitorForm.email);
-      console.log('save'); // axios.get('/sanctum/csrf-cookie').then(response => {
-      //     this.addVisitorForm.post('/api/save/visitor').then(response => {
-      //         console.log(response);
+      var _this = this;
+
+      console.log('save');
+      axios.get('/sanctum/csrf-cookie').then(function (response) {
+        _this.addVisitorForm.post('/api/save/visitor').then(function (response) {
+          console.log(response);
+        });
+      }); // axios.get('/sanctum/csrf-cookie').then(response => {
+      //     this.addVisitorForm.post('/api/save/visitor').then(({data}) => {
+      //         console.log(data);
       //     });
       // });
-
-      this.addVisitorForm.post('/api/save/visitor', data).then(function (response) {
-        console.log(response);
-      });
+      // this.addVisitorForm.post('/api/save/visitor').then(({data}) => {
+      //     console.log(data);
+      // });
     }
   },
   mounted: function mounted() {
@@ -38687,12 +38705,29 @@ var render = function() {
                 _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
                 _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.addVisitorForm.name,
+                      expression: "addVisitorForm.name"
+                    }
+                  ],
                   staticClass: "form-control",
                   attrs: {
                     name: "name",
                     type: "text",
                     id: "name",
                     placeholder: "Name"
+                  },
+                  domProps: { value: _vm.addVisitorForm.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.addVisitorForm, "name", $event.target.value)
+                    }
                   }
                 }),
                 _vm._v(" "),
@@ -38707,20 +38742,228 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(0)
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address" } }, [_vm._v("Adress")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.addVisitorForm.address,
+                      expression: "addVisitorForm.address"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "address",
+                    type: "text",
+                    id: "address",
+                    placeholder: "Address"
+                  },
+                  domProps: { value: _vm.addVisitorForm.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.addVisitorForm,
+                        "address",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addVisitorForm.errors.has("address")
+                  ? _c("div", {
+                      staticClass: "text-danger",
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.addVisitorForm.errors.get("address")
+                        )
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mt-2" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "email",
+                    type: "text",
+                    id: "email",
+                    placeholder: "Email"
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addVisitorForm.errors.has("email")
+                  ? _c("div", {
+                      staticClass: "text-danger",
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.addVisitorForm.errors.get("email")
+                        )
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "mobile_number" } }, [
+                  _vm._v("Mobile Number")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "mobile_number",
+                    type: "text",
+                    id: "mobile_number",
+                    placeholder: "Mobile Number"
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addVisitorForm.errors.has("mobile_number")
+                  ? _c("div", {
+                      staticClass: "text-danger",
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.addVisitorForm.errors.get("mobile_number")
+                        )
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mt-2" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "where_from" } }, [
+                  _vm._v("Where From")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "where_from",
+                    type: "text",
+                    id: "where_from",
+                    placeholder: "Where From"
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addVisitorForm.errors.has("where_from")
+                  ? _c("div", {
+                      staticClass: "text-danger",
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.addVisitorForm.errors.get("where_from")
+                        )
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "where_to" } }, [
+                  _vm._v("Where To")
+                ]),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _vm.addVisitorForm.errors.has("where_to")
+                  ? _c("div", {
+                      staticClass: "text-danger",
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.addVisitorForm.errors.get("where_to")
+                        )
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mt-2" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "purpose" } }, [_vm._v("Purpose")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "purpose",
+                    type: "text",
+                    id: "purpose",
+                    placeholder: "Purpose"
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addVisitorForm.errors.has("purpose")
+                  ? _c("div", {
+                      staticClass: "text-danger",
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.addVisitorForm.errors.get("purpose")
+                        )
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "company_name" } }, [
+                  _vm._v("Company Name")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "company_name",
+                    type: "text",
+                    id: "company_name",
+                    placeholder: "Company Name"
+                  }
+                }),
+                _vm._v(" "),
+                _vm.addVisitorForm.errors.has("company_name")
+                  ? _c("div", {
+                      staticClass: "text-danger",
+                      domProps: {
+                        innerHTML: _vm._s(
+                          _vm.addVisitorForm.errors.get("company_name")
+                        )
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ])
           ]),
           _vm._v(" "),
           _vm._m(1),
           _vm._v(" "),
           _vm._m(2),
           _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
-          _vm._m(4),
-          _vm._v(" "),
-          _vm._m(5),
-          _vm._v(" "),
-          _vm._m(6)
+          _vm._m(3)
         ]
       )
     ])
@@ -38731,158 +38974,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "address" } }, [_vm._v("Adress")]),
+    return _c(
+      "select",
+      {
+        staticClass: "form-control",
+        attrs: { name: "where_to", id: "where_to" }
+      },
+      [
+        _c("option", { attrs: { value: "" } }, [_vm._v("Select company name")]),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            name: "address",
-            type: "text",
-            id: "address",
-            placeholder: "Address"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-2" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              name: "email",
-              type: "text",
-              id: "email",
-              placeholder: "Email"
-            }
-          })
+        _c("option", { attrs: { value: "Skycon Solutions (Kormo)" } }, [
+          _vm._v("Skycon Solutions (Kormo)")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "Skydeck" } }, [_vm._v("Skydeck")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "Ibvoght" } }, [_vm._v("Ibvoght")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "Itrat Husain" } }, [
+          _vm._v("Itrat Husain")
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "mobile_number" } }, [
-            _vm._v("Mobile Number")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              name: "mobile_number",
-              type: "text",
-              id: "mobile_number",
-              placeholder: "Mobile Number"
-            }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-2" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "where_from" } }, [_vm._v("Where From")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              name: "where_from",
-              type: "text",
-              id: "where_from",
-              placeholder: "Where From"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "where_to" } }, [_vm._v("Where To")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { name: "where_to", id: "where_to" }
-            },
-            [
-              _c("option", { attrs: { value: "" } }, [
-                _vm._v("Select company name")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Skycon Solutions (Kormo)" } }, [
-                _vm._v("Skycon Solutions (Kormo)")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Skydeck" } }, [
-                _vm._v("Skydeck")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Ibvoght" } }, [
-                _vm._v("Ibvoght")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Itrat Husain" } }, [
-                _vm._v("Itrat Husain")
-              ])
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-2" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "purpose" } }, [_vm._v("Purpose")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              name: "purpose",
-              type: "text",
-              id: "purpose",
-              placeholder: "Purpose"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "company_name" } }, [
-            _vm._v("Company Name")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              name: "company_name",
-              type: "text",
-              id: "company_name",
-              placeholder: "Company Name"
-            }
-          })
-        ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this

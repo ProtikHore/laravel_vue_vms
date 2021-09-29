@@ -12,7 +12,7 @@ class VisitorController extends Controller
         return response()->json(Visitor::get());
     }
 
-    public function saveRecords(VisitorRequest $request) {
+    public function saveRecords(Request $request) {
         return response()->json($request);
         $record = $request->get('id') === null ? new Visitor() : Visitor::find($request->get('id'));
         $record->name = $request->get('name');
